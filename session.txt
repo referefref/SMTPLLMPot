@@ -1,0 +1,68 @@
+#220 honeypot.net.au Simple Mail Transfer Service Ready
+EHLO honeypot.net.au
+#250-honeypot.net.au greets honeypot.net.au
+#250-DSN
+#250-VRFY
+#250 HELP
+VRFY Maverick
+#250 John Maverick <j.maverick@honeypot.net.au>
+MAIL FROM:"user1@honeypot.net.au"
+#250 OK
+RCPT TO:"j.maverick@honeypot.net.au"
+#250 OK
+RCPT TO:"s.smith@honeypot.net.au"
+#250 OK
+DATA
+#354 Start mail input; end with <CRLF>.<CRLF>
+Date: Wed, 30 July 2019 06:04:34
+From: user1@honeypot.net.au
+Subject: Test email
+To: j.maverick@honeypot.net.au, s.smith@honeypot.net.au
+Email body text
+Multiple lines of text 
+.
+#250 OK
+QUIT
+#221 honeypot.net.au Service closing transmission channel
+
+#220 example.org ESMTP Sendmail 8.13.1/8.13.1; Wed, 30 Aug 2006 07:36:42 -0400
+HELO mailout1.phrednet.com
+#250 example.org Hello honeypot.net.au [121.200.32.60], pleased to meet you
+MAIL FROM:<xxxx@example.com>
+#250 2.1.0 <xxxx@example.com>... Sender ok
+RCPT TO:<yyyy@example.com>
+#250 2.1.5 <yyyy@example.com>... Recipient ok
+DATA
+#354 Enter mail, end with "." on a line by itself
+From: Dave\r\nTo: Test Recipient\r\nSubject: SPAM SPAM SPAM\r\n\r\nThis is message 1 from our test script.\r\n.\r\n
+#250 2.0.0 k7TKIBYb024731 Message accepted for delivery
+QUIT
+#221 2.0.0 example.org closing connection 
+
+EHLO EXAMPLE
+#250-honeypot.net.au Hello honeypot.net.au [121.200.32.60]
+#250-SIZE 52428800
+#250-8BITMIME
+#250-PIPELINING
+#250-AUTH LOGIN PLAIN
+#250-CHUNKING
+#250 HELP
+AUTH PLAIN
+#334 
+AHNvbWV1c2VyQGV4YW1wbGUuYXRtYWlsY2xvdWQuY29tAG15XlBhc3N3MHJk
+#235 Authentication succeeded
+MAIL FROM: someuser@honeypot.net.au
+#250 OK
+RCPT TO: someotheruser@honeypot.net.au
+#250 Accepted Recipient
+DATA
+#354 Enter message, ending with "." on a line by itself
+From: president@whitehouse.gov
+To: all@citizens.us
+Subject: Hello everyone!
+A little spoofed message from someone pretending to be the president@whitehouse.gov
+I hope you enjoyed this blog post.
+.
+#250 OK id=1g0eWC-0003vH-Su
+QUIT
+#221 Bye
